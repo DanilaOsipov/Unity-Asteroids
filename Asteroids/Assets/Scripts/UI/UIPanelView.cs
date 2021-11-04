@@ -1,8 +1,6 @@
-﻿using System;
-using Common;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Contexts.UI.View
+namespace UI
 {
     public abstract class UIPanelData
     {

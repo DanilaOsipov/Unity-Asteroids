@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Common;
-using Contexts.UI.View;
-using UnityEngine;
+using UI;
 using UnityEngine.SceneManagement;
 
 namespace ResourceManagement

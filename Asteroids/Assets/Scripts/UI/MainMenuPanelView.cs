@@ -1,6 +1,4 @@
-﻿using System;
-using Common;
-using Contexts.UI.View;
+﻿using Common;
 using ResourceManagement;
 using UnityEngine;
 using UnityEngine.UI;

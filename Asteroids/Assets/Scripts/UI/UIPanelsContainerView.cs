@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Common;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Contexts.UI.View
+namespace UI
 {
     public class UIPanelsContainerView : MonoBehaviour
     {

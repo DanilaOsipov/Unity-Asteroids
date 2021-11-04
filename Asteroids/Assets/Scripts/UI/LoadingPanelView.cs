@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using Common;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Contexts.UI.View
+namespace UI
 {
     public class LoadingPanelView : UIPanelView<LoadingPanelData>
     {
