@@ -19,7 +19,7 @@ namespace Level.View
         {
             _controls = new Controls(); 
             _levelModel = new LevelModel(_levelConfig);
-            _levelModel.PlayerModel.SetTransform(_playerView.transform);
+            _levelModel.PlayerModel.Transform = _playerView.transform;
         }
 
         private void OnEnable()

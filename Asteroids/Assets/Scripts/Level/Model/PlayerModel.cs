@@ -6,15 +6,12 @@ namespace Level.Model
 {
     public class PlayerModel : Model<PlayerConfig>
     {
-        public Transform Transform { get; private set; }
+        public Transform Transform { get; set; }
+        public Vector2 CurrentInputVector;
+        public Vector2 CurrentVelocity;
         
         public PlayerModel(PlayerConfig config) : base(config)
         {
-        }
-
-        public void SetTransform(Transform transform)
-        {
-            Transform = transform;
         }
     }
 }

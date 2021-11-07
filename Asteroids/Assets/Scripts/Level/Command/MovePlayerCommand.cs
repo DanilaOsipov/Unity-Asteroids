@@ -17,11 +17,21 @@ namespace Level.Command
         
         public void Execute()
         {
-            var rotation = _moveVector.x;
-            Debug.Log("rotation " + rotation);
-            var movement = _moveVector.y;
-            Debug.Log("movement " + movement);
-            // _playerModel.Transform
+            _playerModel.CurrentInputVector = Vector2.SmoothDamp(_playerModel.CurrentInputVector,
+                    _moveVector,
+                    ref _playerModel.CurrentVelocity, 
+                    _playerModel.Config.InputSmoothTime);
+
+            var eulerAngles = _playerModel.Transform.rotation.eulerAngles;
+            eulerAngles.z -= _playerModel.CurrentInputVector.x 
+                             * _playerModel.Config.RotationSpeed * Time.deltaTime; 
+            _playerModel.Transform.rotation = Quaternion.Euler(eulerAngles);
+
+            if (_playerModel.CurrentInputVector.y >= 0)
+            {
+                _playerModel.Transform.position = _playerModel.Transform.position + _playerModel.Transform.up 
+                    * (_playerModel.CurrentInputVector.y * _playerModel.Config.MovementSpeed * Time.deltaTime);
+            }
         }
     }
 }
