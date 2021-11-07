@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Common;
+using UnityEngine;
 
 namespace UI
 {
@@ -17,14 +18,12 @@ namespace UI
         protected abstract void UpdateView(TData data);
     }
     
-    public abstract class UIPanelView : MonoBehaviour
+    public abstract class UIPanelView : View<UIPanelData>
     {
         public abstract UIPanelType Type { get; }
 
         public Transform Transform => transform;
         
-        public abstract void UpdateView(UIPanelData data);
-
         public void Hide()
         {
             gameObject.SetActive(false);
