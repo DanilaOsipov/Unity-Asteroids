@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   _id: PlayerConfig
+  _inputSmoothTime: 0.5
+  _rotationSpeed: 240
+  _movementSpeed: 5

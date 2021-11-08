@@ -5,6 +5,7 @@ using Level.Config;
 using Level.Model;
 using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Level.View
 {
@@ -17,9 +18,15 @@ namespace Level.View
         
         private void Awake()
         {
-            _controls = new Controls(); 
+            _controls = new Controls();
+            _controls.Main.Shoot.performed += OnPlayerShootHandler;
             _levelModel = new LevelModel(_levelConfig);
             _levelModel.PlayerModel.Transform = _playerView.transform;
+        }
+
+        private void OnDestroy()
+        {
+            _controls.Main.Shoot.performed -= OnPlayerShootHandler;
         }
 
         private void OnEnable()
@@ -43,6 +50,10 @@ namespace Level.View
             var moveVector = _controls.Main.Move.ReadValue<Vector2>();
             var movePlayerCommand = new MovePlayerCommand(playerModel, moveVector);
             movePlayerCommand.Execute();
+        }
+
+        private void OnPlayerShootHandler(InputAction.CallbackContext context)
+        {
         }
 
         public override void UpdateView(LevelModel data)
