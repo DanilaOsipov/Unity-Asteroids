@@ -2,11 +2,12 @@
 using Common;
 using Level.Config;
 using Level.Other;
+using UnityEngine;
 
 namespace Level.Model
 {
     public abstract class ObjectPoolModel<TConfig, TElementModel, TElementConfig> : Model<TConfig>, IObjectPool
-        where TConfig : ObjectPoolConfig
+        where TConfig : ObjectPoolConfig<TElementConfig>
         where TElementModel : ObjectPoolElementModel<TElementConfig>
         where TElementConfig : ObjectPoolElementConfig
     {
@@ -19,8 +20,9 @@ namespace Level.Model
             Elements = new List<TElementModel>(config.InitialSize);
             for (int i = 0; i < config.InitialSize; i++)
             {
-                Elements[i] = CreateElement(config.ElementConfig as TElementConfig);
-                Elements[i].Id = i.ToString();
+                var elementModel = CreateElement(config.ElementConfig);
+                elementModel.Id = i.ToString();
+                Elements.Add(elementModel);
             }
         }
 

@@ -1,12 +1,13 @@
 ﻿using Common;
+using Level.Config;
 using Level.Model;
+using Level.Other;
 
 namespace Level.View
 {
-    public class BulletPoolView : View<BulletPoolModel>
+    public class BulletPoolView : ObjectPoolView<BulletPoolModel, BulletPoolConfig, BulletPoolElementModel,
+        BulletPoolElementConfig, BulletPoolElementView>
     {
-        public override void UpdateView(BulletPoolModel data)
-        {
-        }
+        public override ObjectPoolElementType ElementType => ObjectPoolElementType.Bullet;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 using Level.Config;
 using Level.Model;
 using Level.Other;
+using ResourceManagement;
 using UnityEngine;
 
 namespace Level.View
@@ -13,23 +15,32 @@ namespace Level.View
         where TElementView : ObjectPoolElementView<TElementModel, TElementConfig>
         where TElementModel : ObjectPoolElementModel<TElementConfig>
         where TElementConfig : ObjectPoolElementConfig
-        where TConfig : ObjectPoolConfig
+        where TConfig : ObjectPoolConfig<TElementConfig>
     {
-        [SerializeField] private ObjectPoolElementType _elementType; 
         private List<TElementView> _elements;
 
-        public ObjectPoolElementType ElementType => _elementType;
+        public abstract ObjectPoolElementType ElementType { get; }
+        
         public override void UpdateView(TModel data)
         {
             if (_elements == null)
             {
+                
                 _elements = new List<TElementView>(data.Config.InitialSize);
+                foreach (var loadObjectPoolElementViewCommand in data.Elements
+                    .Select(element => new LoadObjectPoolElementCommand(this, element.Config, element.Id)))
+                {
+                    loadObjectPoolElementViewCommand.Execute();
+                }
             }
         }
-        
+
         public void Add(IObjectPoolElement element)
         {
-            _elements.Add(element as TElementView);
+            var objectPoolElementView = element as TElementView;
+            objectPoolElementView.transform.SetParent(transform);
+            objectPoolElementView.transform.localScale = transform.localScale; ;
+            _elements.Add(objectPoolElementView);
         }
     }
 }

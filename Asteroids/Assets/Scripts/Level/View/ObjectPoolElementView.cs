@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Level.Config;
 using Level.Model;
 using Level.Other;
@@ -10,18 +11,17 @@ namespace Level.View
         where TModel : ObjectPoolElementModel<TConfig>
         where TConfig : ObjectPoolElementConfig
     {
-        public string Id { get; private set; }
-        public ObjectPoolElementType Type { get; private set; }
+        public string Id { get; set; }
+        public abstract ObjectPoolElementType Type { get; }
+
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
 
         public override void UpdateView(TModel data)
         {
             gameObject.SetActive(data.IsActive);
-        }
-
-        public void Initialize(TModel data)
-        {
-            Id = data.Id;
-            Type = data.Type;
         }
     }
 }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6732d19343234fdba58fbd3821a54fa5, type: 3}
-  m_Name: LevelConfig
+  m_Script: {fileID: 11500000, guid: 154a26e74fb24fecaf27db3270bd02fb, type: 3}
+  m_Name: BulletPoolElementConfig
   m_EditorClassIdentifier: 
-  _id: LevelConfig
-  _playerConfig: {fileID: 11400000, guid: 3fb124807a7c7c24cac3ad2dd6a7918f, type: 2}
-  _bulletPoolConfig: {fileID: 11400000, guid: c6ce09204867f35418fc2c233ecac0f2, type: 2}
+  _id: BulletPoolElementConfig
+  _type: 0
+  _viewPath: BulletPoolElementView

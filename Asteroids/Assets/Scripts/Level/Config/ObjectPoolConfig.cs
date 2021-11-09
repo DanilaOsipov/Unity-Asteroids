@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Level.Config
 {
-    // TODO GENERIC
-    public abstract class ObjectPoolConfig : Common.Config
+    public abstract class ObjectPoolConfig<TElementConfig> : Common.Config
+    where TElementConfig : ObjectPoolElementConfig
     {
         [SerializeField] private int _initialSize = 20;
-        [SerializeField] private ObjectPoolElementConfig _elementConfig;
+        [SerializeField] private TElementConfig  _elementConfig;
         public int InitialSize => _initialSize;
 
-        public ObjectPoolElementConfig ElementConfig => _elementConfig;
+        public TElementConfig  ElementConfig => _elementConfig;
     }
 }

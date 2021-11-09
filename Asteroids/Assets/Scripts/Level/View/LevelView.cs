@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common;
 using Level.Command;
 using Level.Config;
@@ -13,6 +14,7 @@ namespace Level.View
     {
         [SerializeField] private LevelConfig _levelConfig;
         [SerializeField] private PlayerView _playerView;
+        [SerializeField] private BulletPoolView _bulletPoolView;
         private LevelModel _levelModel;
         private Controls _controls;
         
@@ -22,6 +24,7 @@ namespace Level.View
             _controls.Main.Shoot.performed += OnPlayerShootHandler;
             _levelModel = new LevelModel(_levelConfig);
             _levelModel.PlayerModel.Transform = _playerView.transform;
+            _bulletPoolView.UpdateView(_levelModel.BulletPoolModel);
         }
 
         private void OnDestroy()
