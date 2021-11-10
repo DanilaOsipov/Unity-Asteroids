@@ -12,6 +12,7 @@ namespace Level.Model
         public ObjectPoolElementType Type { get; }
         public bool IsActive { get; set; }
         public Transform Transform { get; set; }
+        public float Speed { get; set; }
         
         protected ObjectPoolElementModel(TConfig config) : base(config)
         {

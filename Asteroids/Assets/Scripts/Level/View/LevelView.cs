@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common;
 using Level.Command;
 using Level.Config;
@@ -24,7 +25,7 @@ namespace Level.View
             _controls.Main.Shoot.performed += OnPlayerShootHandler;
             _levelModel = new LevelModel(_levelConfig);
             _levelModel.PlayerModel.Transform = _playerView.transform;
-            _bulletPoolView.UpdateView(_levelModel.BulletPoolModel);
+            InitializeBulletPool();
         }
 
         private void OnDestroy()
@@ -42,11 +43,37 @@ namespace Level.View
             _controls.Disable();
         }
 
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            var handleLevelTriggerExitCommand 
+                = new HandleLevelTriggerExitCommand(other, _levelModel.ObjectPoolModels);
+            handleLevelTriggerExitCommand.Execute();
+        }
+
+        private void InitializeBulletPool()
+        {
+            _bulletPoolView.UpdateView(_levelModel.BulletPoolModel);
+            foreach (var elementModel in _levelModel.BulletPoolModel.Elements)
+            {
+                elementModel.Transform = _bulletPoolView.Elements
+                    .FirstOrDefault(x => x.Id == elementModel.Id)?.transform;
+            }
+            _levelModel.BulletPoolModel
+                .OnUpdate += delegate { _bulletPoolView.UpdateView(_levelModel.BulletPoolModel); };
+        }
+
         private void Update()
         {
             HandleInput();
+            UpdateObjectPools();
         }
 
+        private void UpdateObjectPools()
+        {
+            var updateBulletPoolCommand = new UpdateBulletPoolCommand(_levelModel.BulletPoolModel);
+            updateBulletPoolCommand.Execute();
+        }
+        
         private void HandleInput()
         {
             var playerModel = _levelModel.PlayerModel;
@@ -57,6 +84,10 @@ namespace Level.View
 
         private void OnPlayerShootHandler(InputAction.CallbackContext context)
         {
+            var playerModel = _levelModel.PlayerModel;
+            var bulletPoolModel = _levelModel.BulletPoolModel;
+            var shootCommand = new ShootCommand(playerModel, bulletPoolModel);
+            shootCommand.Execute();
         }
 
         public override void UpdateView(LevelModel data)

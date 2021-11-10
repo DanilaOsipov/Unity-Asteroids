@@ -20,18 +20,23 @@ namespace Level.View
         private List<TElementView> _elements;
 
         public abstract ObjectPoolElementType ElementType { get; }
-        
+
+        public List<TElementView> Elements => _elements;
+
         public override void UpdateView(TModel data)
         {
             if (_elements == null)
             {
-                
                 _elements = new List<TElementView>(data.Config.InitialSize);
                 foreach (var loadObjectPoolElementViewCommand in data.Elements
                     .Select(element => new LoadObjectPoolElementCommand(this, element.Config, element.Id)))
                 {
                     loadObjectPoolElementViewCommand.Execute();
                 }
+            }
+            foreach (var elementView in _elements)
+            { 
+                elementView.UpdateView(data.Elements.FirstOrDefault(x => x.Id == elementView.Id));   
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 using Level.Config;
 using Level.Other;
@@ -6,7 +7,8 @@ using UnityEngine;
 
 namespace Level.Model
 {
-    public abstract class ObjectPoolModel<TConfig, TElementModel, TElementConfig> : Model<TConfig>, IObjectPool
+    public abstract class ObjectPoolModel<TConfig, TElementModel, TElementConfig> 
+        : Model<TConfig>, IObjectPoolModel
         where TConfig : ObjectPoolConfig<TElementConfig>
         where TElementModel : ObjectPoolElementModel<TElementConfig>
         where TElementConfig : ObjectPoolElementConfig
@@ -22,6 +24,7 @@ namespace Level.Model
             {
                 var elementModel = CreateElement(config.ElementConfig);
                 elementModel.Id = i.ToString();
+                elementModel.OnUpdate += CallUpdateMethod;
                 Elements.Add(elementModel);
             }
         }
@@ -30,6 +33,16 @@ namespace Level.Model
 
         public void Add(IObjectPoolElement element)
         {
+        }
+
+        public void SetElementActive(string id, bool isActive)
+        {
+            var elementModel = Elements.FirstOrDefault(x => x.Id == id);
+            if (elementModel != null)
+            {
+                elementModel.IsActive = isActive;
+                CallUpdateMethod();
+            }
         }
     }
 }
