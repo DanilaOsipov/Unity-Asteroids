@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Level.Config;
 using Level.Other;
+using UnityEngine;
 
 namespace Level.Model
 {
@@ -9,6 +10,7 @@ namespace Level.Model
         public PlayerModel PlayerModel { get; }
         public BulletPoolModel BulletPoolModel { get; }
         public List<IObjectPoolModel> ObjectPoolModels { get; } = new List<IObjectPoolModel>();
+        public BoxCollider2D BoxCollider2D { get; set; }
 
         public LevelModel(LevelConfig config) : base(config)
         {

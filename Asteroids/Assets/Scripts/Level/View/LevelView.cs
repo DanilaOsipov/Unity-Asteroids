@@ -23,7 +23,7 @@ namespace Level.View
         {
             _controls = new Controls();
             _controls.Main.Shoot.performed += OnPlayerShootHandler;
-            _levelModel = new LevelModel(_levelConfig);
+            _levelModel = new LevelModel(_levelConfig) {BoxCollider2D = GetComponent<BoxCollider2D>()};
             _levelModel.PlayerModel.Transform = _playerView.transform;
             InitializeBulletPool();
         }
@@ -46,7 +46,7 @@ namespace Level.View
         private void OnTriggerExit2D(Collider2D other)
         {
             var handleLevelTriggerExitCommand 
-                = new HandleLevelTriggerExitCommand(other, _levelModel.ObjectPoolModels);
+                = new HandleLevelTriggerExitCommand(other, _levelModel);
             handleLevelTriggerExitCommand.Execute();
         }
 
