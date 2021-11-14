@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace ResourceManagement
 {
-    public class LoadObjectPoolElementCommand : ICommand
+    public class LoadObjectPoolElementViewCommand : ICommand
     {
-        private readonly IObjectPool _objectPool;
+        private readonly IObjectPoolView _objectPool;
         private readonly ObjectPoolElementConfig  _elementConfig;
         private readonly string _elementId;
 
-        public LoadObjectPoolElementCommand(IObjectPool objectPool,
+        public LoadObjectPoolElementViewCommand(IObjectPoolView objectPool,
             ObjectPoolElementConfig elementConfig, string elementId)
         {
             _objectPool = objectPool;
@@ -24,7 +24,7 @@ namespace ResourceManagement
         {
             var prefab = Resources.Load(_elementConfig.ViewPath);
             var instance = Object.Instantiate(prefab);
-            var poolElement = instance.GetComponent<IObjectPoolElement>();
+            var poolElement = instance.GetComponent<IObjectPoolElementView>();
             poolElement.Id = _elementId;
             _objectPool.Add(poolElement);
         }

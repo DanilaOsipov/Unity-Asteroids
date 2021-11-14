@@ -2,6 +2,7 @@
 {
     public enum ObjectPoolElementType
     {
-        Bullet
+        Bullet,
+        BigAsteroid
     }
 }

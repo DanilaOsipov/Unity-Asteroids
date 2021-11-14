@@ -14,12 +14,13 @@ namespace Level.Model
         where TElementConfig : ObjectPoolElementConfig
     {
         public ObjectPoolElementType ElementType { get; }
-        public List<TElementModel> Elements { get; }
+
+        public List<IObjectPoolElementModel> Elements { get; }
         
         protected ObjectPoolModel(TConfig config) : base(config)
         {
             ElementType = config.ElementConfig.Type;
-            Elements = new List<TElementModel>(config.InitialSize);
+            Elements = new List<IObjectPoolElementModel>(config.InitialSize);
             for (int i = 0; i < config.InitialSize; i++)
             {
                 var elementModel = CreateElement(config.ElementConfig);
@@ -31,10 +32,10 @@ namespace Level.Model
 
         protected abstract TElementModel CreateElement(TElementConfig elementConfig);
 
-        public void Add(IObjectPoolElement element)
+        public void Add(IObjectPoolElementModel element)
         {
         }
-
+        
         public void SetElementActive(string id, bool isActive)
         {
             var elementModel = Elements.FirstOrDefault(x => x.Id == id);

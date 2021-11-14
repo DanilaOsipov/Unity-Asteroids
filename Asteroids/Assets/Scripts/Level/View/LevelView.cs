@@ -5,6 +5,7 @@ using Common;
 using Level.Command;
 using Level.Config;
 using Level.Model;
+using Level.Other;
 using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,8 @@ namespace Level.View
         [SerializeField] private LevelConfig _levelConfig;
         [SerializeField] private PlayerView _playerView;
         [SerializeField] private BulletPoolView _bulletPoolView;
+        [SerializeField] private BigAsteroidPoolView _bigAsteroidPoolView;
+        private List<IObjectPoolView> _objectPoolViews;
         private LevelModel _levelModel;
         private Controls _controls;
         
@@ -25,7 +28,7 @@ namespace Level.View
             _controls.Main.Shoot.performed += OnPlayerShootHandler;
             _levelModel = new LevelModel(_levelConfig) {BoxCollider2D = GetComponent<BoxCollider2D>()};
             _levelModel.PlayerModel.Transform = _playerView.transform;
-            InitializeBulletPool();
+            InitializeObjectPools();
         }
 
         private void OnDestroy()
@@ -50,16 +53,25 @@ namespace Level.View
             handleLevelTriggerExitCommand.Execute();
         }
 
-        private void InitializeBulletPool()
+        private void InitializeObjectPools()
         {
-            _bulletPoolView.UpdateView(_levelModel.BulletPoolModel);
-            foreach (var elementModel in _levelModel.BulletPoolModel.Elements)
+            _objectPoolViews = new List<IObjectPoolView> {_bulletPoolView
+                // , _bigAsteroidPoolView
+                
+            };
+            foreach (var poolView in _objectPoolViews)
             {
-                elementModel.Transform = _bulletPoolView.Elements
-                    .FirstOrDefault(x => x.Id == elementModel.Id)?.transform;
+                var objectPoolModel = _levelModel.ObjectPoolModels
+                    .FirstOrDefault(x => x.ElementType == poolView.ElementType);
+                poolView.UpdateView(objectPoolModel);
+                foreach (var elementModel in objectPoolModel.Elements)
+                {
+                    elementModel.Transform = poolView.Elements
+                        .FirstOrDefault(x => x.Id == elementModel.Id)?.Transform;
+                }
+                objectPoolModel.OnUpdate 
+                    += delegate { poolView.UpdateView(objectPoolModel); };
             }
-            _levelModel.BulletPoolModel
-                .OnUpdate += delegate { _bulletPoolView.UpdateView(_levelModel.BulletPoolModel); };
         }
 
         private void Update()

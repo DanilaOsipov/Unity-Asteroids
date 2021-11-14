@@ -1,8 +1,8 @@
 ﻿namespace Level.Other
 {
-    public interface IObjectPool
+    public interface IObjectPool<TElement> where TElement : IObjectPoolElement 
     {
         ObjectPoolElementType ElementType { get; }
-        void Add(IObjectPoolElement element);
+        void Add(TElement element);
     }
 }

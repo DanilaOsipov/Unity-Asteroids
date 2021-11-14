@@ -9,43 +9,47 @@ using UnityEngine;
 
 namespace Level.View
 {
-    public abstract class ObjectPoolView<TModel, TConfig, TElementModel, TElementConfig, TElementView>
-        : View<TModel>, IObjectPool
+    public abstract class ObjectPoolView<TModel, TConfig, TElementModel, TElementConfig>
+        : View<TModel>, IObjectPoolView
         where TModel : ObjectPoolModel<TConfig, TElementModel, TElementConfig>
-        where TElementView : ObjectPoolElementView<TElementModel, TElementConfig>
         where TElementModel : ObjectPoolElementModel<TElementConfig>
         where TElementConfig : ObjectPoolElementConfig
         where TConfig : ObjectPoolConfig<TElementConfig>
     {
-        private List<TElementView> _elements;
+        private List<IObjectPoolElementView> _elements;
 
         public abstract ObjectPoolElementType ElementType { get; }
 
-        public List<TElementView> Elements => _elements;
+        public List<IObjectPoolElementView> Elements => _elements;
 
         public override void UpdateView(TModel data)
         {
             if (_elements == null)
             {
-                _elements = new List<TElementView>(data.Config.InitialSize);
+                _elements = new List<IObjectPoolElementView>(data.Config.InitialSize);
                 foreach (var loadObjectPoolElementViewCommand in data.Elements
-                    .Select(element => new LoadObjectPoolElementCommand(this, element.Config, element.Id)))
+                    .Select(element => new LoadObjectPoolElementViewCommand(this, element.Config, element.Id)))
                 {
                     loadObjectPoolElementViewCommand.Execute();
                 }
             }
             foreach (var elementView in _elements)
             { 
-                elementView.UpdateView(data.Elements.FirstOrDefault(x => x.Id == elementView.Id));   
+                elementView.UpdateView(data.Elements
+                    .FirstOrDefault(x => x.Id == elementView.Id));   
             }
         }
 
-        public void Add(IObjectPoolElement element)
+        void IObjectPoolView.UpdateView(IObjectPoolModel objectPoolModel)
         {
-            var objectPoolElementView = element as TElementView;
-            objectPoolElementView.transform.SetParent(transform);
-            objectPoolElementView.transform.localScale = transform.localScale; ;
-            _elements.Add(objectPoolElementView);
+            UpdateView(objectPoolModel as TModel);
+        }
+
+        public void Add(IObjectPoolElementView element)
+        {
+            element.Transform.SetParent(transform);
+            element.Transform.localScale = transform.localScale; ;
+            _elements.Add(element);
         }
     }
 }

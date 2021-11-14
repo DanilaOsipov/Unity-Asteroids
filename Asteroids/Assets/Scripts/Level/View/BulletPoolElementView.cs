@@ -4,7 +4,8 @@ using Level.Other;
 
 namespace Level.View
 {
-    public class BulletPoolElementView : ObjectPoolElementView<BulletPoolElementModel, BulletPoolElementConfig>
+    public class BulletPoolElementView 
+        : ObjectPoolElementView<BulletPoolElementModel, BulletPoolElementConfig>
     {
         public override ObjectPoolElementType Type => ObjectPoolElementType.Bullet;
     }

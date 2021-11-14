@@ -7,12 +7,14 @@ using UnityEngine;
 
 namespace Level.View
 {
-    public abstract class ObjectPoolElementView<TModel, TConfig> : View<TModel>, IObjectPoolElement
+    public abstract class ObjectPoolElementView<TModel, TConfig> 
+        : View<TModel>, IObjectPoolElementView
         where TModel : ObjectPoolElementModel<TConfig>
         where TConfig : ObjectPoolElementConfig
     {
         public string Id { get; set; }
         public abstract ObjectPoolElementType Type { get; }
+        public Transform Transform => transform;
 
         private void Awake()
         {
@@ -22,6 +24,11 @@ namespace Level.View
         public override void UpdateView(TModel data)
         {
             gameObject.SetActive(data.IsActive);
+        }
+
+        void IObjectPoolElementView.UpdateView(IObjectPoolElementModel data)
+        {
+            UpdateView(data as TModel);
         }
     }
 }
