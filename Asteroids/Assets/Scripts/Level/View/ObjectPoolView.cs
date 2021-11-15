@@ -18,7 +18,7 @@ namespace Level.View
     {
         private List<IObjectPoolElementView> _elements;
 
-        public abstract ObjectPoolElementType ElementType { get; }
+        public abstract EntityType ElementType { get; }
 
         public List<IObjectPoolElementView> Elements => _elements;
 

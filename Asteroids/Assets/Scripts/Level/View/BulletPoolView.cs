@@ -7,6 +7,6 @@ namespace Level.View
 {
     public class BulletPoolView : ObjectPoolView<BulletPoolModel, BulletPoolConfig, BulletPoolElementModel, BulletPoolElementConfig>
     {
-        public override ObjectPoolElementType ElementType => ObjectPoolElementType.Bullet;
+        public override EntityType ElementType => EntityType.Bullet;
     }
 }

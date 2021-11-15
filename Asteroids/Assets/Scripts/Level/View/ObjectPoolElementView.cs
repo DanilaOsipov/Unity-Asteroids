@@ -13,7 +13,7 @@ namespace Level.View
         where TConfig : ObjectPoolElementConfig
     {
         public string Id { get; set; }
-        public abstract ObjectPoolElementType Type { get; }
+        public abstract EntityType Type { get; }
         public Transform Transform => transform;
 
         private void Awake()

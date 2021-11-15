@@ -6,6 +6,6 @@ namespace Level.View
 {
     public class BigAsteroidPoolView : ObjectPoolView<BigAsteroidPoolModel, BigAsteroidPoolConfig, BigAsteroidPoolElementModel, BigAsteroidPoolElementConfig>
     {
-        public override ObjectPoolElementType ElementType => ObjectPoolElementType.BigAsteroid;
+        public override EntityType ElementType => EntityType.BigAsteroid;
     }
 }

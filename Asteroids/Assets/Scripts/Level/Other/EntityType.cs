@@ -1,6 +1,6 @@
 ﻿namespace Level.Other
 {
-    public enum ObjectPoolElementType
+    public enum EntityType
     {
         Bullet,
         BigAsteroid

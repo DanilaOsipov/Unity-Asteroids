@@ -18,6 +18,7 @@ namespace Level.View
         [SerializeField] private PlayerView _playerView;
         [SerializeField] private BulletPoolView _bulletPoolView;
         [SerializeField] private BigAsteroidPoolView _bigAsteroidPoolView;
+        [SerializeField] private List<SpawnerView> _spawnerViews;
         private List<IObjectPoolView> _objectPoolViews;
         private LevelModel _levelModel;
         private Controls _controls;
@@ -29,6 +30,7 @@ namespace Level.View
             _levelModel = new LevelModel(_levelConfig) {BoxCollider2D = GetComponent<BoxCollider2D>()};
             _levelModel.PlayerModel.Transform = _playerView.transform;
             InitializeObjectPools();
+            InitializeSpawners();
         }
 
         private void OnDestroy()
@@ -53,12 +55,27 @@ namespace Level.View
             handleLevelTriggerExitCommand.Execute();
         }
 
+        private void InitializeSpawners()
+        {
+            foreach (var spawnerModel in _levelModel.SpawnerModels)
+            {
+                var spawnerView = _spawnerViews
+                    .FirstOrDefault(x => x.Type == spawnerModel.Config.Type);
+                if (spawnerView == null) continue;
+                spawnerModel.SpawnPoints = spawnerView.SpawnPoints;
+                spawnerView.OnReadyToSpawn += delegate(EntityType type)
+                {
+                    var spawnEntityCommand = new SpawnEntityCommand(type, _levelModel);
+                    spawnEntityCommand.Execute();
+                };
+                spawnerView.UpdateView(spawnerModel);
+                spawnerView.StartSpawnCoroutine();
+            }
+        }
+
         private void InitializeObjectPools()
         {
-            _objectPoolViews = new List<IObjectPoolView> {_bulletPoolView
-                // , _bigAsteroidPoolView
-                
-            };
+            _objectPoolViews = new List<IObjectPoolView> { _bulletPoolView, _bigAsteroidPoolView };
             foreach (var poolView in _objectPoolViews)
             {
                 var objectPoolModel = _levelModel.ObjectPoolModels

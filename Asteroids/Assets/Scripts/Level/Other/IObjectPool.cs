@@ -2,7 +2,7 @@
 {
     public interface IObjectPool<TElement> where TElement : IObjectPoolElement 
     {
-        ObjectPoolElementType ElementType { get; }
+        EntityType ElementType { get; }
         void Add(TElement element);
     }
 }

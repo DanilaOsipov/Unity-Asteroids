@@ -5,10 +5,10 @@ namespace Level.Config
 {
     public abstract class ObjectPoolElementConfig : Common.Config
     {
-        [SerializeField] private ObjectPoolElementType _type;
+        [SerializeField] private EntityType _type;
         [SerializeField] private string _viewPath;
 
-        public ObjectPoolElementType Type => _type;
+        public EntityType Type => _type;
 
         public string ViewPath => _viewPath;
     }

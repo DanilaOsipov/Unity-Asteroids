@@ -13,7 +13,7 @@ namespace Level.Model
         where TElementModel : ObjectPoolElementModel<TElementConfig>
         where TElementConfig : ObjectPoolElementConfig
     {
-        public ObjectPoolElementType ElementType { get; }
+        public EntityType ElementType { get; }
 
         public List<IObjectPoolElementModel> Elements { get; }
         

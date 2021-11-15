@@ -9,7 +9,7 @@ namespace Level.Model
         where TConfig : ObjectPoolElementConfig
     {
         public string Id { get; set; }
-        public ObjectPoolElementType Type { get; }
+        public EntityType Type { get; }
         public bool IsActive { get; set; }
         public Transform Transform { get; set; }
         ObjectPoolElementConfig IObjectPoolElementModel.Config => Config;
