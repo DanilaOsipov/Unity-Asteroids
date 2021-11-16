@@ -18,6 +18,7 @@ namespace Level.Model
         protected ObjectPoolElementModel(TConfig config) : base(config)
         {
             Type = config.Type;
+            Speed = config.Speed;
         }
     }
 }

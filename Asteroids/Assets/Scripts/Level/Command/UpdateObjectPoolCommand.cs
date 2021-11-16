@@ -1,21 +1,16 @@
 ﻿using System.Linq;
 using Common;
-using Level.Config;
-using Level.Model;
+using Level.Other;
 using Level.View;
 using UnityEngine;
 
 namespace Level.Command
 {
-    public abstract class UpdateObjectPoolCommand<TModel, TConfig, TElementModel, TElementConfig> : ICommand
-        where TModel : ObjectPoolModel<TConfig, TElementModel, TElementConfig>
-        where TElementModel : ObjectPoolElementModel<TElementConfig>
-        where TElementConfig : ObjectPoolElementConfig
-        where TConfig : ObjectPoolConfig<TElementConfig>
+    public class UpdateObjectPoolCommand : ICommand
     {
-        private readonly TModel _objectPoolModel;
+        private readonly IObjectPoolModel _objectPoolModel;
 
-        protected UpdateObjectPoolCommand(TModel objectPoolModel)
+        public UpdateObjectPoolCommand(IObjectPoolModel objectPoolModel)
         {
             _objectPoolModel = objectPoolModel;
         }

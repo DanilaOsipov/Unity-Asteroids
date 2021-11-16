@@ -26,7 +26,6 @@ namespace Level.Command
             {
                 bulletPoolElementModel.Transform.position = _playerModel.Transform.position;
                 bulletPoolElementModel.Transform.rotation = _playerModel.Transform.rotation;
-                bulletPoolElementModel.Speed = _playerModel.Config.BulletSpeed;
                 bulletPoolElementModel.IsActive = true;
                 bulletPoolElementModel.CallUpdateMethod();
                 _playerModel.CanShoot = false;

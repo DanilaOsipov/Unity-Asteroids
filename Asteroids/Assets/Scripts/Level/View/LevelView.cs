@@ -99,8 +99,11 @@ namespace Level.View
 
         private void UpdateObjectPools()
         {
-            var updateBulletPoolCommand = new UpdateBulletPoolCommand(_levelModel.BulletPoolModel);
-            updateBulletPoolCommand.Execute();
+            foreach (var updateBulletPoolCommand in _levelModel.ObjectPoolModels
+                .Select(objectPoolModel => new UpdateObjectPoolCommand(objectPoolModel)))
+            {
+                updateBulletPoolCommand.Execute();
+            }
         }
         
         private void HandleInput()

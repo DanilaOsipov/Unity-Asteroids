@@ -30,7 +30,8 @@ namespace Level.Command
             var spawnPoint = spawnerModel.SpawnPoints[Random.Range(0,
                 spawnerModel.SpawnPoints.Count)];
             elementModel.Transform.position = spawnPoint.position;
-            // elementModel.Speed 
+            elementModel.Transform.up = _levelModel.PlayerModel.Transform.position
+                                           - elementModel.Transform.position;
             elementModel.IsActive = true;
             elementModel.CallUpdateMethod();
         }
