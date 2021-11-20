@@ -16,7 +16,7 @@ namespace Level.View
         public abstract EntityType Type { get; }
         public Transform Transform => transform;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             gameObject.SetActive(false);
         }
@@ -29,6 +29,16 @@ namespace Level.View
         void IObjectPoolElementView.UpdateView(IObjectPoolElementModel data)
         {
             UpdateView(data as TModel);
+        }
+
+        void IObjectPoolElementView.Initialize(IObjectPoolElementModel elementModel)
+        {
+            Initialize(elementModel as TModel);
+        }
+
+        public override void Initialize(TModel data)
+        {
+            Id = data.Id;
         }
     }
 }

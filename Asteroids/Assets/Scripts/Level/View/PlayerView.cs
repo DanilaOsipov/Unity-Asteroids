@@ -8,5 +8,9 @@ namespace Level.View
         public override void UpdateView(PlayerModel data)
         {
         }
+
+        public override void Initialize(PlayerModel data)
+        {
+        }
     }
 }

@@ -9,23 +9,21 @@ namespace ResourceManagement
     public class LoadObjectPoolElementViewCommand : ICommand
     {
         private readonly IObjectPoolView _objectPool;
-        private readonly ObjectPoolElementConfig  _elementConfig;
-        private readonly string _elementId;
+        private readonly IObjectPoolElementModel _elementModel;
 
         public LoadObjectPoolElementViewCommand(IObjectPoolView objectPool,
-            ObjectPoolElementConfig elementConfig, string elementId)
+            IObjectPoolElementModel elementModel)
         {
             _objectPool = objectPool;
-            _elementConfig = elementConfig;
-            _elementId = elementId;
+            _elementModel = elementModel;
         }
         
         public void Execute()
         {
-            var prefab = Resources.Load(_elementConfig.ViewPath);
+            var prefab = Resources.Load(_elementModel.Config.ViewPath);
             var instance = Object.Instantiate(prefab);
             var poolElement = instance.GetComponent<IObjectPoolElementView>();
-            poolElement.Id = _elementId;
+            poolElement.Initialize(_elementModel);
             _objectPool.Add(poolElement);
         }
     }

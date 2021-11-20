@@ -16,3 +16,4 @@ MonoBehaviour:
   _type: 0
   _viewPath: BulletPoolElementView
   _speed: 20
+  _damage: 1

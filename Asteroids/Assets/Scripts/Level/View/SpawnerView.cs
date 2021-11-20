@@ -25,6 +25,10 @@ namespace Level.View
             _spawnDelay = data.Config.SpawnDelay;
         }
 
+        public override void Initialize(SpawnerModel data)
+        {
+        }
+
         public void StartSpawnCoroutine()
         {
             StartCoroutine(SpawnCoroutine());

@@ -3,6 +3,7 @@
     public enum EntityType
     {
         Bullet,
-        BigAsteroid
+        BigAsteroid,
+        Player
     }
 }

@@ -24,15 +24,6 @@ namespace Level.View
 
         public override void UpdateView(TModel data)
         {
-            if (_elements == null)
-            {
-                _elements = new List<IObjectPoolElementView>(data.Config.InitialSize);
-                foreach (var loadObjectPoolElementViewCommand in data.Elements
-                    .Select(element => new LoadObjectPoolElementViewCommand(this, element.Config, element.Id)))
-                {
-                    loadObjectPoolElementViewCommand.Execute();
-                }
-            }
             foreach (var elementView in _elements)
             { 
                 elementView.UpdateView(data.Elements
@@ -43,6 +34,21 @@ namespace Level.View
         void IObjectPoolView.UpdateView(IObjectPoolModel objectPoolModel)
         {
             UpdateView(objectPoolModel as TModel);
+        }
+
+        public override void Initialize(TModel data)
+        {
+            _elements = new List<IObjectPoolElementView>(data.Config.InitialSize);
+            foreach (var loadObjectPoolElementViewCommand in data.Elements
+                .Select(element => new LoadObjectPoolElementViewCommand(this, element)))
+            {
+                loadObjectPoolElementViewCommand.Execute();
+            }
+        }
+
+        void IObjectPoolView.Initialize(IObjectPoolModel objectPoolModel)
+        {
+            Initialize(objectPoolModel as TModel);
         }
 
         public void Add(IObjectPoolElementView element)

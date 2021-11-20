@@ -26,6 +26,10 @@ namespace UI
         protected override void UpdateView(MainMenuPanelData data)
         {
         }
+
+        public override void Initialize(UIPanelData data)
+        {
+        }
     }
     
      public class MainMenuPanelData : UIPanelData

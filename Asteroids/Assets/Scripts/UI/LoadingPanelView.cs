@@ -14,6 +14,10 @@ namespace UI
         {
             _progressBar.fillAmount = data.LoadingProgress;
         }
+
+        public override void Initialize(UIPanelData data)
+        {
+        }
     }
 
     public class LoadingPanelData : UIPanelData

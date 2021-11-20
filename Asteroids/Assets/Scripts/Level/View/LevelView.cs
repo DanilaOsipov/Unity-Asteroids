@@ -80,14 +80,21 @@ namespace Level.View
             {
                 var objectPoolModel = _levelModel.ObjectPoolModels
                     .FirstOrDefault(x => x.ElementType == poolView.ElementType);
-                poolView.UpdateView(objectPoolModel);
+                poolView.Initialize(objectPoolModel);
                 foreach (var elementModel in objectPoolModel.Elements)
                 {
                     elementModel.Transform = poolView.Elements
                         .FirstOrDefault(x => x.Id == elementModel.Id)?.Transform;
                 }
-                objectPoolModel.OnUpdate 
-                    += delegate { poolView.UpdateView(objectPoolModel); };
+                objectPoolModel.OnUpdate += delegate { poolView.UpdateView(objectPoolModel); };
+                if (poolView is IHittable hittable)
+                {
+                    hittable.HitListener.OnHit += delegate(EntityType type, string id, int damage)
+                    {
+                        var addHealthCommand = new AddHealthCommand(objectPoolModel, id, -damage);
+                        addHealthCommand.Execute();
+                    };
+                }
             }
         }
 
@@ -123,6 +130,10 @@ namespace Level.View
         }
 
         public override void UpdateView(LevelModel data)
+        {
+        }
+
+        public override void Initialize(LevelModel data)
         {
         }
     }
