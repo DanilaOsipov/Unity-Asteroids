@@ -4,6 +4,7 @@
     {
         Bullet,
         BigAsteroid,
-        Player
+        Player,
+        SmallAsteroid
     }
 }

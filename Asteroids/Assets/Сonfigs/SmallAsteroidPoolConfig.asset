@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f10ca7c4402b861daa27759ed363, type: 3}
+  m_Name: SmallAsteroidPoolConfig
+  m_EditorClassIdentifier: 
+  _id: SmallAsteroidPoolConfig
+  _initialSize: 20
+  _elementConfig: {fileID: 11400000, guid: 3dc4b6b4c74cc254cb6f23d50247d6a3, type: 2}

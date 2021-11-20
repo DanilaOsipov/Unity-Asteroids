@@ -10,6 +10,7 @@ namespace Level.Config
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private BulletPoolConfig _bulletPoolConfig;
         [SerializeField] private BigAsteroidPoolConfig _bigAsteroidPoolConfig;
+        [SerializeField] private SmallAsteroidPoolConfig _smallAsteroidPoolConfig;
         [SerializeField] private List<SpawnerConfig> _spawnerConfigs;
         
         public PlayerConfig PlayerConfig => _playerConfig;
@@ -19,5 +20,7 @@ namespace Level.Config
         public BigAsteroidPoolConfig BigAsteroidPoolConfig => _bigAsteroidPoolConfig;
 
         public List<SpawnerConfig> SpawnerConfigs => _spawnerConfigs;
+
+        public SmallAsteroidPoolConfig SmallAsteroidPoolConfig => _smallAsteroidPoolConfig;
     }
 }

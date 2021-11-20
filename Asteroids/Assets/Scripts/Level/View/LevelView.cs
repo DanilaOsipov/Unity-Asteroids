@@ -18,6 +18,7 @@ namespace Level.View
         [SerializeField] private PlayerView _playerView;
         [SerializeField] private BulletPoolView _bulletPoolView;
         [SerializeField] private BigAsteroidPoolView _bigAsteroidPoolView;
+        [SerializeField] private SmallAsteroidPoolView _smallAsteroidPoolView;
         [SerializeField] private List<SpawnerView> _spawnerViews;
         private List<IObjectPoolView> _objectPoolViews;
         private LevelModel _levelModel;
@@ -75,7 +76,8 @@ namespace Level.View
 
         private void InitializeObjectPools()
         {
-            _objectPoolViews = new List<IObjectPoolView> { _bulletPoolView, _bigAsteroidPoolView };
+            _objectPoolViews = new List<IObjectPoolView> 
+                { _bulletPoolView, _bigAsteroidPoolView, _smallAsteroidPoolView };
             foreach (var poolView in _objectPoolViews)
             {
                 var objectPoolModel = _levelModel.ObjectPoolModels
