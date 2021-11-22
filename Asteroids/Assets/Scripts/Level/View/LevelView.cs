@@ -93,7 +93,8 @@ namespace Level.View
                 {
                     hittable.HitListener.OnHit += delegate(EntityType type, string id, int damage)
                     {
-                        var addHealthCommand = new AddHealthCommand(objectPoolModel, id, -damage);
+                        var addHealthCommand 
+                            = new AddHealthCommand(_levelModel, type, id, -damage);
                         addHealthCommand.Execute();
                     };
                 }
