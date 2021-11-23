@@ -5,6 +5,7 @@
         Bullet,
         BigAsteroid,
         Player,
-        SmallAsteroid
+        SmallAsteroid,
+        Enemy
     }
 }

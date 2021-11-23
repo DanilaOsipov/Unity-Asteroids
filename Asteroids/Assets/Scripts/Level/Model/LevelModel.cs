@@ -12,6 +12,7 @@ namespace Level.Model
         public BulletPoolModel BulletPoolModel { get; }
         public BigAsteroidPoolModel BigAsteroidPoolModel { get; }
         public SmallAsteroidPoolModel SmallAsteroidPoolModel { get; }
+        public EnemyPoolModel EnemyPoolModel { get; set; }
         public List<IObjectPoolModel> ObjectPoolModels { get; } = new List<IObjectPoolModel>();
         public BoxCollider2D BoxCollider2D { get; set; }
         public List<SpawnerModel> SpawnerModels { get; } = new List<SpawnerModel>();
@@ -22,9 +23,11 @@ namespace Level.Model
             BulletPoolModel = new BulletPoolModel(config.BulletPoolConfig);
             BigAsteroidPoolModel = new BigAsteroidPoolModel(config.BigAsteroidPoolConfig);
             SmallAsteroidPoolModel = new SmallAsteroidPoolModel(config.SmallAsteroidPoolConfig);
+            EnemyPoolModel = new EnemyPoolModel(config.EnemyPoolConfig);
             ObjectPoolModels.Add(BulletPoolModel);
             ObjectPoolModels.Add(BigAsteroidPoolModel);
             ObjectPoolModels.Add(SmallAsteroidPoolModel);
+            ObjectPoolModels.Add(EnemyPoolModel);
             foreach (var spawnerModel in config.SpawnerConfigs
                 .Select(spawnerConfig => new SpawnerModel(spawnerConfig)))
             {

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Common;
+using Level.Model;
 using Level.Other;
 using Level.View;
 using UnityEngine;
@@ -8,17 +9,27 @@ namespace Level.Command
 {
     public class UpdateObjectPoolCommand : ICommand
     {
-        private readonly IObjectPoolModel _objectPoolModel;
+        private readonly LevelModel _levelModel;
+        private readonly EntityType _entityType;
 
-        public UpdateObjectPoolCommand(IObjectPoolModel objectPoolModel)
+        public UpdateObjectPoolCommand(LevelModel levelModel, EntityType entityType)
         {
-            _objectPoolModel = objectPoolModel;
+            _levelModel = levelModel;
+            _entityType = entityType;
         }
-        
+
         public void Execute()
         {
-            foreach (var elementModel in _objectPoolModel.Elements.Where(elementModel => elementModel.IsActive))
+            var objectPoolModel = _levelModel.ObjectPoolModels
+                .FirstOrDefault(x => x.ElementType == _entityType);
+            foreach (var elementModel in objectPoolModel.Elements
+                .Where(elementModel => elementModel.IsActive))
             {
+                if (elementModel.Type == EntityType.Enemy)
+                {
+                    elementModel.Transform.up = _levelModel.PlayerModel.Transform.position
+                                                - elementModel.Transform.position;
+                }
                 elementModel.Transform.position += elementModel.Transform
                     .up * (elementModel.Speed * Time.deltaTime);
             }

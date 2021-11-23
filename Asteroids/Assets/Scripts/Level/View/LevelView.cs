@@ -19,6 +19,7 @@ namespace Level.View
         [SerializeField] private BulletPoolView _bulletPoolView;
         [SerializeField] private BigAsteroidPoolView _bigAsteroidPoolView;
         [SerializeField] private SmallAsteroidPoolView _smallAsteroidPoolView;
+        [SerializeField] private EnemyPoolView _enemyPoolView;
         [SerializeField] private List<SpawnerView> _spawnerViews;
         private List<IObjectPoolView> _objectPoolViews;
         private LevelModel _levelModel;
@@ -77,7 +78,7 @@ namespace Level.View
         private void InitializeObjectPools()
         {
             _objectPoolViews = new List<IObjectPoolView> 
-                { _bulletPoolView, _bigAsteroidPoolView, _smallAsteroidPoolView };
+                { _bulletPoolView, _bigAsteroidPoolView, _smallAsteroidPoolView, _enemyPoolView};
             foreach (var poolView in _objectPoolViews)
             {
                 var objectPoolModel = _levelModel.ObjectPoolModels
@@ -110,7 +111,8 @@ namespace Level.View
         private void UpdateObjectPools()
         {
             foreach (var updateBulletPoolCommand in _levelModel.ObjectPoolModels
-                .Select(objectPoolModel => new UpdateObjectPoolCommand(objectPoolModel)))
+                .Select(objectPoolModel => new UpdateObjectPoolCommand(_levelModel,
+                    objectPoolModel.ElementType)))
             {
                 updateBulletPoolCommand.Execute();
             }

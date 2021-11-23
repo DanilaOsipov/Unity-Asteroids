@@ -17,6 +17,8 @@ MonoBehaviour:
   _bulletPoolConfig: {fileID: 11400000, guid: c6ce09204867f35418fc2c233ecac0f2, type: 2}
   _bigAsteroidPoolConfig: {fileID: 11400000, guid: 8f7fd6da118d6e94e92b9bfb4315457f, type: 2}
   _smallAsteroidPoolConfig: {fileID: 11400000, guid: c0cc4556dec70c94ea06ab741180a5af, type: 2}
+  _enemyPoolConfig: {fileID: 11400000, guid: 926aabbd98522254488df05dfbd12f79, type: 2}
   _spawnerConfigs:
   - {fileID: 11400000, guid: 05c433589c585914dac2f7596257a1b6, type: 2}
   - {fileID: 11400000, guid: c030654cd36b2a84a91a918b36d4291d, type: 2}
+  - {fileID: 11400000, guid: 29e4f1f9bbc0fa44690b4fb867bd081e, type: 2}
