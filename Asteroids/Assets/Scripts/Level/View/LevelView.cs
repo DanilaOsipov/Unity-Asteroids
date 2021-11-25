@@ -28,16 +28,16 @@ namespace Level.View
         private void Awake()
         {
             _controls = new Controls();
-            _controls.Main.Shoot.performed += OnPlayerShootHandler;
+            _controls.Main.BulletShoot.performed += OnPlayerShootBulletHandler;
             _levelModel = new LevelModel(_levelConfig) {BoxCollider2D = GetComponent<BoxCollider2D>()};
-            _levelModel.PlayerModel.Transform = _playerView.transform;
+            InitializePLayer();
             InitializeObjectPools();
             InitializeSpawners();
         }
 
         private void OnDestroy()
         {
-            _controls.Main.Shoot.performed -= OnPlayerShootHandler;
+            _controls.Main.BulletShoot.performed -= OnPlayerShootBulletHandler;
         }
 
         private void OnEnable()
@@ -55,6 +55,17 @@ namespace Level.View
             var handleLevelTriggerExitCommand 
                 = new HandleLevelTriggerExitCommand(other, _levelModel);
             handleLevelTriggerExitCommand.Execute();
+        }
+
+        private void InitializePLayer()
+        {
+            _levelModel.PlayerModel.Transform = _playerView.transform;
+            foreach (var weaponModel in _levelModel.PlayerModel.WeaponModels)
+            {
+                weaponModel.Transform = _playerView.WeaponViews
+                    .FirstOrDefault(x => x.Type == weaponModel.Config.Type)
+                    ?.transform;
+            }
         }
 
         private void InitializeSpawners()
@@ -126,11 +137,11 @@ namespace Level.View
             movePlayerCommand.Execute();
         }
 
-        private void OnPlayerShootHandler(InputAction.CallbackContext context)
+        private void OnPlayerShootBulletHandler(InputAction.CallbackContext context)
         {
             var playerModel = _levelModel.PlayerModel;
             var bulletPoolModel = _levelModel.BulletPoolModel;
-            var shootCommand = new ShootCommand(playerModel, bulletPoolModel);
+            var shootCommand = new ShootBulletCommand(playerModel, bulletPoolModel);
             shootCommand.Execute();
         }
 

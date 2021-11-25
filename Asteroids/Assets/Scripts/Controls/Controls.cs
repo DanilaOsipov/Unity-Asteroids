@@ -37,9 +37,18 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""Bullet Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""fb2b0f1a-dd1a-4134-b5aa-b74ded7fca50"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Laser Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d7b93c6-c059-4fae-aa7c-5b2294e4d8ad"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -105,11 +114,22 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8ce021d2-2c56-4022-8e08-4126a161c3f6"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Shoot"",
+                    ""action"": ""Bullet Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5446b31-2325-4fbc-9764-0f2d1008db5f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Laser Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -133,7 +153,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // Main
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
-        m_Main_Shoot = m_Main.FindAction("Shoot", throwIfNotFound: true);
+        m_Main_BulletShoot = m_Main.FindAction("Bullet Shoot", throwIfNotFound: true);
+        m_Main_LaserShoot = m_Main.FindAction("Laser Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -194,13 +215,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Main;
     private IMainActions m_MainActionsCallbackInterface;
     private readonly InputAction m_Main_Move;
-    private readonly InputAction m_Main_Shoot;
+    private readonly InputAction m_Main_BulletShoot;
+    private readonly InputAction m_Main_LaserShoot;
     public struct MainActions
     {
         private @Controls m_Wrapper;
         public MainActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Main_Move;
-        public InputAction @Shoot => m_Wrapper.m_Main_Shoot;
+        public InputAction @BulletShoot => m_Wrapper.m_Main_BulletShoot;
+        public InputAction @LaserShoot => m_Wrapper.m_Main_LaserShoot;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -213,9 +236,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
-                @Shoot.started -= m_Wrapper.m_MainActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnShoot;
+                @BulletShoot.started -= m_Wrapper.m_MainActionsCallbackInterface.OnBulletShoot;
+                @BulletShoot.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnBulletShoot;
+                @BulletShoot.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnBulletShoot;
+                @LaserShoot.started -= m_Wrapper.m_MainActionsCallbackInterface.OnLaserShoot;
+                @LaserShoot.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnLaserShoot;
+                @LaserShoot.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnLaserShoot;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -223,9 +249,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
+                @BulletShoot.started += instance.OnBulletShoot;
+                @BulletShoot.performed += instance.OnBulletShoot;
+                @BulletShoot.canceled += instance.OnBulletShoot;
+                @LaserShoot.started += instance.OnLaserShoot;
+                @LaserShoot.performed += instance.OnLaserShoot;
+                @LaserShoot.canceled += instance.OnLaserShoot;
             }
         }
     }
@@ -242,6 +271,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IMainActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
+        void OnBulletShoot(InputAction.CallbackContext context);
+        void OnLaserShoot(InputAction.CallbackContext context);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Level.Config
 {
@@ -8,7 +9,7 @@ namespace Level.Config
         [SerializeField] private float _inputSmoothTime = 0.5f;
         [SerializeField] private float _rotationSpeed = 240.0f;
         [SerializeField] private float _movementSpeed = 10.0f;
-        [SerializeField] private float _shootDelay = 0.25f;
+        [SerializeField] private List<WeaponConfig> _weaponConfigs;
         
         public float InputSmoothTime => _inputSmoothTime;
 
@@ -16,6 +17,6 @@ namespace Level.Config
 
         public float MovementSpeed => _movementSpeed;
 
-        public float ShootDelay => _shootDelay;
+        public List<WeaponConfig> WeaponConfigs => _weaponConfigs;
     }
 }

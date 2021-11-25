@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a13e583f59324f93b37f79cb2b2aa470, type: 3}
-  m_Name: PlayerConfig
+  m_Script: {fileID: 11500000, guid: c1f4c0837a1748ca96b0d7fca0be163b, type: 3}
+  m_Name: BulletGunConfig
   m_EditorClassIdentifier: 
-  _id: PlayerConfig
-  _inputSmoothTime: 0.5
-  _rotationSpeed: 240
-  _movementSpeed: 5
-  _weaponConfigs:
-  - {fileID: 11400000, guid: 229411a3b21522b4eabceadc487d3899, type: 2}
+  _id: BulletGunConfig
+  _type: 0
+  _damage: 1
+  _shootDelay: 0.25
+  _isReloadable: 0
+  _reloadTime: 0

@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Bullet Shoot",
                     "type": "Button",
                     "id": "fb2b0f1a-dd1a-4134-b5aa-b74ded7fca50",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Laser Shoot",
+                    "type": "Button",
+                    "id": "9d7b93c6-c059-4fae-aa7c-5b2294e4d8ad",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -83,11 +92,22 @@
                 {
                     "name": "",
                     "id": "8ce021d2-2c56-4022-8e08-4126a161c3f6",
-                    "path": "<Keyboard>/space",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Shoot",
+                    "action": "Bullet Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5446b31-2325-4fbc-9764-0f2d1008db5f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Laser Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
