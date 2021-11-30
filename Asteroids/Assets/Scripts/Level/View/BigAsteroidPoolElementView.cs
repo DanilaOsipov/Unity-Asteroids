@@ -5,17 +5,8 @@ using Level.Other;
 namespace Level.View
 {
     public class BigAsteroidPoolElementView 
-        : ObjectPoolElementView<BigAsteroidPoolElementModel, BigAsteroidPoolElementConfig>,
-            IHittable
+        : ObjectPoolElementView<BigAsteroidPoolElementModel, BigAsteroidPoolElementConfig>
     {
         public override EntityType Type => EntityType.BigAsteroid;
-        public IHitListener HitListener { get; private set; }
-
-        public override void Initialize(BigAsteroidPoolElementModel data)
-        {
-            base.Initialize(data);
-            HitListener = GetComponent<IHitListener>();
-            HitListener.Initialize(Type, Id);
-        }
     }
 }

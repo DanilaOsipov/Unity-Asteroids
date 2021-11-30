@@ -18,3 +18,4 @@ MonoBehaviour:
   _movementSpeed: 5
   _weaponConfigs:
   - {fileID: 11400000, guid: 229411a3b21522b4eabceadc487d3899, type: 2}
+  - {fileID: 11400000, guid: b0051ce306ccd054d934e47bc04a87b5, type: 2}

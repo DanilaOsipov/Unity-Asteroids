@@ -12,8 +12,9 @@ namespace Level.Config
         [SerializeField] private BigAsteroidPoolConfig _bigAsteroidPoolConfig;
         [SerializeField] private SmallAsteroidPoolConfig _smallAsteroidPoolConfig;
         [SerializeField] private EnemyPoolConfig _enemyPoolConfig;
+        [SerializeField] private LaserProjectilePoolConfig _laserProjectilePoolConfig;
         [SerializeField] private List<SpawnerConfig> _spawnerConfigs;
-        
+
         public PlayerConfig PlayerConfig => _playerConfig;
 
         public BulletPoolConfig BulletPoolConfig => _bulletPoolConfig;
@@ -25,5 +26,7 @@ namespace Level.Config
         public SmallAsteroidPoolConfig SmallAsteroidPoolConfig => _smallAsteroidPoolConfig;
 
         public EnemyPoolConfig EnemyPoolConfig => _enemyPoolConfig;
+
+        public LaserProjectilePoolConfig LaserProjectilePoolConfig => _laserProjectilePoolConfig;
     }
 }

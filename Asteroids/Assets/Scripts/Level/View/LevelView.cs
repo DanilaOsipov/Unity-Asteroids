@@ -20,6 +20,7 @@ namespace Level.View
         [SerializeField] private BigAsteroidPoolView _bigAsteroidPoolView;
         [SerializeField] private SmallAsteroidPoolView _smallAsteroidPoolView;
         [SerializeField] private EnemyPoolView _enemyPoolView;
+        [SerializeField] private LaserProjectilePoolView _laserProjectilePoolView;
         [SerializeField] private List<SpawnerView> _spawnerViews;
         private List<IObjectPoolView> _objectPoolViews;
         private LevelModel _levelModel;
@@ -29,6 +30,7 @@ namespace Level.View
         {
             _controls = new Controls();
             _controls.Main.BulletShoot.performed += OnPlayerShootBulletHandler;
+            _controls.Main.LaserShoot.performed += OnPlayerShootLaserHandler;
             _levelModel = new LevelModel(_levelConfig) {BoxCollider2D = GetComponent<BoxCollider2D>()};
             InitializePLayer();
             InitializeObjectPools();
@@ -38,6 +40,7 @@ namespace Level.View
         private void OnDestroy()
         {
             _controls.Main.BulletShoot.performed -= OnPlayerShootBulletHandler;
+            _controls.Main.LaserShoot.performed -= OnPlayerShootLaserHandler;
         }
 
         private void OnEnable()
@@ -66,6 +69,7 @@ namespace Level.View
                     .FirstOrDefault(x => x.Type == weaponModel.Config.Type)
                     ?.transform;
             }
+            _playerView.Initialize(_levelModel.PlayerModel);
         }
 
         private void InitializeSpawners()
@@ -88,8 +92,11 @@ namespace Level.View
 
         private void InitializeObjectPools()
         {
-            _objectPoolViews = new List<IObjectPoolView> 
-                { _bulletPoolView, _bigAsteroidPoolView, _smallAsteroidPoolView, _enemyPoolView};
+            _objectPoolViews = new List<IObjectPoolView>
+            {
+                _bulletPoolView, _bigAsteroidPoolView, _smallAsteroidPoolView,
+                _enemyPoolView, _laserProjectilePoolView
+            };
             foreach (var poolView in _objectPoolViews)
             {
                 var objectPoolModel = _levelModel.ObjectPoolModels
@@ -101,15 +108,12 @@ namespace Level.View
                         .FirstOrDefault(x => x.Id == elementModel.Id)?.Transform;
                 }
                 objectPoolModel.OnUpdate += delegate { poolView.UpdateView(objectPoolModel); };
-                if (poolView is IHittable hittable)
+                poolView.OnCollisionEnter += (type, id, collision) =>
                 {
-                    hittable.HitListener.OnHit += delegate(EntityType type, string id, int damage)
-                    {
-                        var addHealthCommand 
-                            = new AddHealthCommand(_levelModel, type, id, -damage);
-                        addHealthCommand.Execute();
-                    };
-                }
+                    var checkEntityCollisionCommand
+                        = new CheckEntityCollisionCommand(_levelModel, type, id, collision);
+                    checkEntityCollisionCommand.Execute();
+                };
             }
         }
 
@@ -139,9 +143,13 @@ namespace Level.View
 
         private void OnPlayerShootBulletHandler(InputAction.CallbackContext context)
         {
-            var playerModel = _levelModel.PlayerModel;
-            var bulletPoolModel = _levelModel.BulletPoolModel;
-            var shootCommand = new ShootBulletCommand(playerModel, bulletPoolModel);
+            var shootCommand = new ShootCommand(WeaponType.BulletGun, _levelModel);
+            shootCommand.Execute();
+        }
+
+        private void OnPlayerShootLaserHandler(InputAction.CallbackContext context)
+        {
+            var shootCommand = new ShootCommand(WeaponType.LaserGun, _levelModel);
             shootCommand.Execute();
         }
 

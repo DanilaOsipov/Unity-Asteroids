@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common;
 using Level.Config;
@@ -21,7 +22,10 @@ namespace Level.View
         public abstract EntityType ElementType { get; }
 
         public List<IObjectPoolElementView> Elements => _elements;
-
+        
+        public event Action<EntityType, string, Collision2D> OnCollisionEnter
+            = delegate(EntityType type, string id, Collision2D collision) { };
+        
         public override void UpdateView(TModel data)
         {
             foreach (var elementView in _elements)
@@ -54,7 +58,9 @@ namespace Level.View
         public void Add(IObjectPoolElementView element)
         {
             element.Transform.SetParent(transform);
-            element.Transform.localScale = transform.localScale; ;
+            element.Transform.localScale = transform.localScale; 
+            element.OnCollisionEnter += delegate(EntityType type, string id,
+                Collision2D collision) { OnCollisionEnter(type, id, collision); };
             _elements.Add(element);
         }
     }

@@ -13,12 +13,22 @@ namespace Level.View
         where TConfig : ObjectPoolElementConfig
     {
         public string Id { get; set; }
+        
         public abstract EntityType Type { get; }
+        
         public Transform Transform => transform;
+        
+        public event Action<EntityType, string, Collision2D> OnCollisionEnter 
+            = delegate(EntityType type, string id, Collision2D collision) { };
 
         protected virtual void Awake()
         {
             gameObject.SetActive(false);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            OnCollisionEnter(Type, Id, other);
         }
 
         public override void UpdateView(TModel data)

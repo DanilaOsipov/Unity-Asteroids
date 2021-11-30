@@ -6,6 +6,7 @@
         BigAsteroid,
         Player,
         SmallAsteroid,
-        Enemy
+        Enemy,
+        LaserProjectile
     }
 }

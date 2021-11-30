@@ -25,6 +25,7 @@ namespace Level.Command
                 .FirstOrDefault(x => x.ElementType == _type);
             var elementModel = objectPoolModel.Elements
                 .FirstOrDefault(x => !x.IsActive);
+            if (elementModel == null) return;
             var spawnerModel = _levelModel.SpawnerModels
                 .FirstOrDefault(x => x.Config.Type == _type);
             var spawnPoint = spawnerModel.SpawnPoints[Random.Range(0,

@@ -277,7 +277,6 @@ GameObject:
   m_Component:
   - component: {fileID: 163187595}
   - component: {fileID: 163187597}
-  - component: {fileID: 163187596}
   m_Layer: 5
   m_Name: SmallAsteroidPoolView
   m_TagString: Untagged
@@ -305,18 +304,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &163187596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163187594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17260bdc022c493a863873f4063dcd2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &163187597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +493,7 @@ RectTransform:
   m_Children:
   - {fileID: 1592684828}
   - {fileID: 928961367}
+  - {fileID: 903481419}
   m_Father: {fileID: 1198407198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -528,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponViews:
   - {fileID: 928961368}
+  - {fileID: 903481420}
 --- !u!61 &343381219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -617,7 +606,7 @@ RectTransform:
   - {fileID: 2146245262}
   - {fileID: 159650370}
   m_Father: {fileID: 1198407198}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -951,6 +940,57 @@ RectTransform:
   m_AnchoredPosition: {x: -450, y: 380}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &903481418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 903481419}
+  - component: {fileID: 903481420}
+  m_Layer: 5
+  m_Name: LaserGunView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &903481419
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903481418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 343381217}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 47}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &903481420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903481418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00856039e5949448fc40dc182163ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponType: 1
+  _shootingStateView: {fileID: 0}
 --- !u!1 &928961366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,6 +1041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponType: 0
+  _shootingStateView: {fileID: 0}
 --- !u!1 &949134510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,7 +1084,7 @@ RectTransform:
   - {fileID: 1667546463}
   - {fileID: 111180386}
   m_Father: {fileID: 1198407198}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1357,6 +1398,7 @@ RectTransform:
   - {fileID: 1711949625}
   - {fileID: 163187595}
   - {fileID: 1258902467}
+  - {fileID: 2141594016}
   - {fileID: 375313837}
   - {fileID: 1230136711}
   - {fileID: 949134511}
@@ -1386,6 +1428,7 @@ MonoBehaviour:
   _bigAsteroidPoolView: {fileID: 1711949626}
   _smallAsteroidPoolView: {fileID: 163187597}
   _enemyPoolView: {fileID: 1258902468}
+  _laserProjectilePoolView: {fileID: 2141594017}
   _spawnerViews:
   - {fileID: 375313838}
   - {fileID: 1230136712}
@@ -1494,7 +1537,7 @@ RectTransform:
   - {fileID: 748559829}
   - {fileID: 2042524607}
   m_Father: {fileID: 1198407198}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1537,7 +1580,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1258902467}
   - component: {fileID: 1258902468}
-  - component: {fileID: 1258902469}
   m_Layer: 5
   m_Name: EnemyPoolView
   m_TagString: Untagged
@@ -1575,18 +1617,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e8bddbcd2fd4350a315e93f6a24eee2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1258902469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258902466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17260bdc022c493a863873f4063dcd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1343738349
@@ -2150,7 +2180,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1711949625}
   - component: {fileID: 1711949626}
-  - component: {fileID: 1711949627}
   m_Layer: 5
   m_Name: BigAsteroidPoolView
   m_TagString: Untagged
@@ -2188,18 +2217,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2aa45423e0f4413b45504ca6623535c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1711949627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711949624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17260bdc022c493a863873f4063dcd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1733917725
@@ -2418,6 +2435,55 @@ RectTransform:
   m_AnchoredPosition: {x: 850, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2141594015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2141594016}
+  - component: {fileID: 2141594017}
+  m_Layer: 5
+  m_Name: LaserProjectilePoolView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2141594016
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141594015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1198407198}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2141594017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141594015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595e9732851142aba7b86b46bd302640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2146245261
 GameObject:
   m_ObjectHideFlags: 0

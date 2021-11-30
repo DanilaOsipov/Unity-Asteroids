@@ -5,17 +5,8 @@ using Level.Other;
 namespace Level.View
 {
     public class EnemyPoolElementView : ObjectPoolElementView<EnemyPoolElementModel,
-            EnemyPoolElementConfig>, IHittable
+            EnemyPoolElementConfig>
     {
         public override EntityType Type => EntityType.Enemy;
-        
-        public IHitListener HitListener { get; private set; }
-
-        public override void Initialize(EnemyPoolElementModel data)
-        {
-            base.Initialize(data);
-            HitListener = GetComponent<IHitListener>();
-            HitListener.Initialize(Type, Id);
-        }
     }
 }
