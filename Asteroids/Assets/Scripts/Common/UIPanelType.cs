@@ -3,6 +3,7 @@
     public enum UIPanelType
     {
         LoadingPanel,
-        MainMenuPanel
+        MainMenuPanel,
+        PlayerInfoPanel
     }
 }
