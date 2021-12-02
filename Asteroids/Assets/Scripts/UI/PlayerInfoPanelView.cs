@@ -10,7 +10,7 @@ namespace UI
         [SerializeField] private TMP_Text _playerRotation;
         [SerializeField] private TMP_Text _playerVelocity;
         [SerializeField] private TMP_Text _laserShots;
-        [SerializeField] private TMP_Text _laserReloadTime;
+        [SerializeField] private TMP_Text _laserReloadingTimeLeft;
         
         public override UIPanelType Type => UIPanelType.PlayerInfoPanel;
         
@@ -20,11 +20,21 @@ namespace UI
         
         protected override void UpdateView(PlayerInfoPanelData data)
         {
-            _playerPosition.text = "Position: " + data.PlayerPosition;
-            _playerRotation.text = "Rotation: " + data.PlayerRotation;
-            _playerVelocity.text = "Velocity: " + data.PlayerVelocity;
-            _laserShots.text = "Laser shots: " + data.CurrentLaserShots / data.LaserShotsBeforeReload;
-            _laserReloadTime.text = "Laser reload time: " + data.LaserReloadTime;
+            _playerPosition.text = "Position: " + data.PlayerPosition.ToString("0.00");
+            _playerRotation.text = "Rotation: " + data.PlayerRotation.eulerAngles.z.ToString("0.00");
+            _playerVelocity.text = "Velocity: " + data.PlayerVelocity.magnitude.ToString("0.00");
+            if (data.LaserReloadingTimeLeft == null)
+            {
+                _laserReloadingTimeLeft.gameObject.SetActive(false);    
+                _laserShots.text = string.Format($"Laser shots: {data.CurrentLaserShots} / {data.LaserShotsBeforeReload}");
+                _laserShots.gameObject.SetActive(true);
+            }
+            else
+            {
+                _laserShots.gameObject.SetActive(false);
+                _laserReloadingTimeLeft.text = "Reloading laser: " + data.LaserReloadingTimeLeft.Value.ToString("0.00");
+                _laserReloadingTimeLeft.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -35,18 +45,18 @@ namespace UI
         public Vector2 PlayerVelocity { get; }
         public int CurrentLaserShots { get; }
         public int LaserShotsBeforeReload { get; }
-        public float LaserReloadTime { get; }
+        public float? LaserReloadingTimeLeft { get; }
 
         public PlayerInfoPanelData(Vector2 playerPosition, Quaternion playerRotation,
             Vector2 playerVelocity, int currentLaserShots, int laserShotsBeforeReload,
-            float laserReloadTime)
+            float? laserReloadingTimeLeft)
         {
             PlayerPosition = playerPosition;
             PlayerRotation = playerRotation;
             PlayerVelocity = playerVelocity;
             CurrentLaserShots = currentLaserShots;
             LaserShotsBeforeReload = laserShotsBeforeReload;
-            LaserReloadTime = laserReloadTime;
+            LaserReloadingTimeLeft = laserReloadingTimeLeft;
         }
     }
 }

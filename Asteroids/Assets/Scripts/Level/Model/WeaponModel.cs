@@ -23,6 +23,8 @@ namespace Level.Model
         }
 
         public int FiredShotsCount { get; private set; }
+        
+        public float? ReloadingTimeLeft { get; set; }
 
         public event Action<WeaponState> OnStateChanged = delegate { };
 

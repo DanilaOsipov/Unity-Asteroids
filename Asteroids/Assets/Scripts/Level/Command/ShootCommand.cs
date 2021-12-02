@@ -31,7 +31,13 @@ namespace Level.Command
                 && weaponModel.FiredShotsCount % weaponModel.Config.ShotsBeforeReload == 0)
             {
                 weaponModel.State = WeaponState.Reloading;
-                await Task.Delay(Mathf.RoundToInt(weaponModel.Config.ReloadTime * 1000.0f));
+                var reloadTime = weaponModel.Config.ReloadTime; 
+                for (float t = 0; t < reloadTime; t += Time.deltaTime)
+                {
+                    weaponModel.ReloadingTimeLeft = reloadTime - t;
+                    await Task.Yield();
+                }
+                weaponModel.ReloadingTimeLeft = null;
             }
             else
             {

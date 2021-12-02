@@ -6,6 +6,7 @@ using Level.Command;
 using Level.Config;
 using Level.Model;
 using Level.Other;
+using UI;
 using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -35,6 +36,7 @@ namespace Level.View
             InitializePLayer();
             InitializeObjectPools();
             InitializeSpawners();
+            UIPanelsContainerView.Instance.ShowPanel(UIPanelType.PlayerInfoPanel);
         }
 
         private void OnDestroy()
@@ -121,6 +123,14 @@ namespace Level.View
         {
             HandleInput();
             UpdateObjectPools();
+            UpdatePlayerInfo();
+        }
+
+        private void UpdatePlayerInfo()
+        {
+            var updatePlayerInfoPanelCommand
+                = new UpdatePlayerInfoPanelCommand(_levelModel.PlayerModel);
+            updatePlayerInfoPanelCommand.Execute();
         }
 
         private void UpdateObjectPools()
