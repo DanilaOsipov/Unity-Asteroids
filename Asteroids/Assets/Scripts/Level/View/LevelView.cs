@@ -33,7 +33,7 @@ namespace Level.View
             _controls.Main.BulletShoot.performed += OnPlayerShootBulletHandler;
             _controls.Main.LaserShoot.performed += OnPlayerShootLaserHandler;
             _levelModel = new LevelModel(_levelConfig) {BoxCollider2D = GetComponent<BoxCollider2D>()};
-            InitializePLayer();
+            InitializePlayer();
             InitializeObjectPools();
             InitializeSpawners();
             UIPanelsContainerView.Instance.ShowPanel(UIPanelType.PlayerInfoPanel);
@@ -62,7 +62,7 @@ namespace Level.View
             handleLevelTriggerExitCommand.Execute();
         }
 
-        private void InitializePLayer()
+        private void InitializePlayer()
         {
             _levelModel.PlayerModel.Transform = _playerView.transform;
             foreach (var weaponModel in _levelModel.PlayerModel.WeaponModels)
@@ -72,6 +72,13 @@ namespace Level.View
                     ?.transform;
             }
             _playerView.Initialize(_levelModel.PlayerModel);
+            _playerView.OnCollisionEnter += delegate(EntityType type, string id,
+                Collision2D collision)
+            {
+                var checkEntityCollisionCommand
+                    = new CheckEntityCollisionCommand(_levelModel, type, id, collision);
+                checkEntityCollisionCommand.Execute(); 
+            };
         }
 
         private void InitializeSpawners()
@@ -121,6 +128,7 @@ namespace Level.View
 
         private void Update()
         {
+            if (!_levelModel.IsUpdating) return;
             HandleInput();
             UpdateObjectPools();
             UpdatePlayerInfo();

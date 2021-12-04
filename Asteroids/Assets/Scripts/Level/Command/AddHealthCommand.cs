@@ -2,6 +2,7 @@
 using Common;
 using Level.Model;
 using Level.Other;
+using UI;
 using UnityEngine;
 
 namespace Level.Command
@@ -24,15 +25,15 @@ namespace Level.Command
 
         public void Execute()
         {
-            var objectPoolModel = _levelModel.ObjectPoolModels
-                .FirstOrDefault(x => x.ElementType == _entityType);
-            var elementModel = objectPoolModel.Elements
-                .FirstOrDefault(x => x.Id == _elementId);
-            if (elementModel is not IHealable healable) return;
-            healable.Health += _health;
-            if (healable.Health > 0) return;
-            if (elementModel.Type != EntityType.Player)
+            if (_entityType != EntityType.Player)
             {
+                var objectPoolModel = _levelModel.ObjectPoolModels
+                    .FirstOrDefault(x => x.ElementType == _entityType);
+                var elementModel = objectPoolModel.Elements
+                    .FirstOrDefault(x => x.Id == _elementId);
+                if (elementModel is not IHealable healable) return;
+                healable.Health += _health;
+                if (healable.Health > 0) return;
                 healable.Health = ((IHealable)elementModel.Config).Health;
                 elementModel.IsActive = false;
                 elementModel.CallUpdateMethod();
@@ -44,7 +45,12 @@ namespace Level.Command
             }
             else
             {
-            
+                _levelModel.PlayerModel.Health += _health;
+                _levelModel.PlayerModel.CallUpdateMethod();
+                if (_levelModel.PlayerModel.Health > 0) return;
+                _levelModel.IsUpdating = false;
+                UIPanelsContainerView.Instance.HidePanel(UIPanelType.PlayerInfoPanel);
+                UIPanelsContainerView.Instance.ShowPanel(UIPanelType.GameOverPanel);
             }
         }
 

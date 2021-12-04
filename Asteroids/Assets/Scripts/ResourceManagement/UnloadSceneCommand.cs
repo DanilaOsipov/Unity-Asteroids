@@ -7,23 +7,23 @@ using UnityEngine.SceneManagement;
 
 namespace ResourceManagement
 {
-    public class LoadSceneCommand : ManageSceneResourceCommand
+    public class UnloadSceneCommand : ManageSceneResourceCommand
     {
-        public event Action<string> OnSceneLoaded = delegate(string sceneName) { }; 
+        public event Action<string> OnSceneUnloaded = delegate(string sceneName) { }; 
         
-        public LoadSceneCommand(string sceneName) : base(sceneName)
+        public UnloadSceneCommand(string sceneName) : base(sceneName)
         {
         }
 
         public override void Execute()
         {
             base.Execute();
-            OnSceneLoaded(_sceneName);
+            OnSceneUnloaded(_sceneName);
         }
 
         protected override AsyncOperation GetAsyncOperation(string sceneName)
         {
-            return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            return SceneManager.UnloadSceneAsync(sceneName);
         }
     }
 }

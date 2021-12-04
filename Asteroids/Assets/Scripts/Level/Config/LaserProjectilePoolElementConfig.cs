@@ -5,10 +5,7 @@ namespace Level.Config
 {
     [CreateAssetMenu(fileName = "LaserProjectilePoolElementConfig",
         menuName = "Config/LaserProjectilePoolElementConfig")]
-    public class LaserProjectilePoolElementConfig : ObjectPoolElementConfig, IDamagable
+    public class LaserProjectilePoolElementConfig : ObjectPoolElementConfig
     {
-        [SerializeField] private int _damage;
-
-        public int Damage => _damage;
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Level.View
 {
     public abstract class ObjectPoolElementView<TModel, TConfig> 
-        : View<TModel>, IObjectPoolElementView
+        : View<TModel>, IObjectPoolElementView, IDamagable
         where TModel : ObjectPoolElementModel<TConfig>
         where TConfig : ObjectPoolElementConfig
     {
@@ -17,6 +17,10 @@ namespace Level.View
         public abstract EntityType Type { get; }
         
         public Transform Transform => transform;
+
+        public int Damage { get; private set; }
+        
+        public bool IsFriendlyToPlayer { get; private set; }
         
         public event Action<EntityType, string, Collision2D> OnCollisionEnter 
             = delegate(EntityType type, string id, Collision2D collision) { };
@@ -49,6 +53,8 @@ namespace Level.View
         public override void Initialize(TModel data)
         {
             Id = data.Id;
+            Damage = data.Damage;
+            IsFriendlyToPlayer = data.IsFriendlyToPlayer;
         }
     }
 }

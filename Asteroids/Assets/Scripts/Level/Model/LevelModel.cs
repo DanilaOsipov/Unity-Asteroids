@@ -17,6 +17,7 @@ namespace Level.Model
         public List<IObjectPoolModel> ObjectPoolModels { get; } = new List<IObjectPoolModel>();
         public BoxCollider2D BoxCollider2D { get; set; }
         public List<SpawnerModel> SpawnerModels { get; } = new List<SpawnerModel>();
+        public bool IsUpdating { get; set; } = true;
 
         public LevelModel(LevelConfig config) : base(config)
         {

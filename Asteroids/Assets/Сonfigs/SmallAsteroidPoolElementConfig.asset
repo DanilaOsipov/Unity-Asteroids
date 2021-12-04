@@ -16,4 +16,6 @@ MonoBehaviour:
   _type: 3
   _viewPath: SmallAsteroidPoolElementView
   _speed: 2
+  _damage: 1
+  _isFriendlyToPlayer: 0
   _health: 1

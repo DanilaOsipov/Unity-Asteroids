@@ -9,13 +9,11 @@ namespace Level.View
     [RequireComponent(typeof(TrailRenderer))]
     public class LaserProjectilePoolElementView
         : ObjectPoolElementView<LaserProjectilePoolElementModel, 
-            LaserProjectilePoolElementConfig>, IDamagable
+            LaserProjectilePoolElementConfig>
     {
         private TrailRenderer _trailRenderer;
         
         public override EntityType Type => EntityType.LaserProjectile;
-        
-        public int Damage { get; private set; }
 
         protected override void Awake()
         {
@@ -26,12 +24,6 @@ namespace Level.View
         private void OnEnable()
         {
             _trailRenderer.Clear();
-        }
-
-        public override void UpdateView(LaserProjectilePoolElementModel data)
-        {
-            base.UpdateView(data);
-            Damage = data.Config.Damage;
         }
     }
 }

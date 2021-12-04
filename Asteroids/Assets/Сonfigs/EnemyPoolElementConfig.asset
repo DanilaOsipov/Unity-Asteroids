@@ -16,4 +16,6 @@ MonoBehaviour:
   _type: 4
   _viewPath: EnemyPoolElementView
   _speed: 1
+  _damage: 1
+  _isFriendlyToPlayer: 0
   _health: 1

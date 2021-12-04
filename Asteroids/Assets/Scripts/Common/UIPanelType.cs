@@ -4,6 +4,7 @@
     {
         LoadingPanel,
         MainMenuPanel,
-        PlayerInfoPanel
+        PlayerInfoPanel,
+        GameOverPanel
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Level.Other
 {
-    public interface IObjectPoolElementModel : IObjectPoolElement
+    public interface IObjectPoolElementModel : IObjectPoolElement, IDamagable
     {
         bool IsActive { get; set; }
         float Speed { get; set; }
