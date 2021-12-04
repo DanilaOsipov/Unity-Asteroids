@@ -50,6 +50,7 @@ namespace Level.Command
                 if (_levelModel.PlayerModel.Health > 0) return;
                 _levelModel.IsUpdating = false;
                 UIPanelsContainerView.Instance.HidePanel(UIPanelType.PlayerInfoPanel);
+                UIPanelsContainerView.Instance.HidePanel(UIPanelType.ControlsTipsPanel);
                 UIPanelsContainerView.Instance.ShowPanel(UIPanelType.GameOverPanel);
             }
         }

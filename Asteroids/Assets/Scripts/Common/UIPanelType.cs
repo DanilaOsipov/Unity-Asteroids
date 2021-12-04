@@ -5,6 +5,7 @@
         LoadingPanel,
         MainMenuPanel,
         PlayerInfoPanel,
-        GameOverPanel
+        GameOverPanel,
+        ControlsTipsPanel
     }
 }

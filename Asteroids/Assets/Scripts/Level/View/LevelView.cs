@@ -37,6 +37,7 @@ namespace Level.View
             InitializeObjectPools();
             InitializeSpawners();
             UIPanelsContainerView.Instance.ShowPanel(UIPanelType.PlayerInfoPanel);
+            UIPanelsContainerView.Instance.ShowPanel(UIPanelType.ControlsTipsPanel);
         }
 
         private void OnDestroy()
